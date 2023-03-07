@@ -89,16 +89,25 @@
                 <button type="submit" name="dec">DECRYPT</button> 
             </form>
         </div>
-        <p id="pass"><?php if(isset($_POST["enc"])){echo $out;}?></p><button onclick="copy()" class="copy">copy</button>
+        <!-- <p id="pass"></p> -->
+        <input type="text" id="pass" value="<?php if(isset($_POST["enc"])){echo $out;}?>">
+        <button onclick="copy()" class="copy">copy</button>
     </section>
     <script>
+        // function copy() {
+        //     var copyText = document.getElementById("pass");
+        //     copyText.select();
+        //     copyText.setSelectionRange(0, 99999);
+        //     navigator.clipboard.writeText(copyText.value)
+        //     alert("TEXT COPIED:" + copyText.value);
+        // }
         function copy() {
-            var copyText = document.getElementById("pass");
-            copyText.select();
-            copyText.setSelectionRange(0, 99999);
-            navigator.clipboard.writeText(copyText.value)
-            alert("TEXT COPIED:" + copyText.value);
-        }
+  var copyText = document.getElementById("myInput");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999);
+  navigator.clipboard.writeText(copyText.value);
+  alert("Copied the text: " + copyText.value);
+}
     </script>
 </body>
 </html>
