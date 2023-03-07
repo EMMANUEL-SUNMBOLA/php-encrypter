@@ -2,5 +2,6 @@
 <h3>PHP ENCRYPTER</h3>
 <p>I made this encoder for fun</p>
 <ul>
-<li>I used the ascii character table</li>
+<li>I used the ascii character table to convert each letter/symbol/digit of the inputed string to it's corresponding ascii digits </li>
+<li>Already works in the terminal ,almost done with web version</li>
 </ul>
