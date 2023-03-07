@@ -68,6 +68,16 @@
             flex-direction: column;
 
         }
+        .container p{
+            border: 1px solid ;
+            padding: 20px 10px;
+        }
+        .copy{
+            width: 100px;
+            height: 40px;
+            color: black;
+            background-color: wheat;
+        }
     </style>
 </head>
 <body>
@@ -79,7 +89,16 @@
                 <button type="submit" name="dec">DECRYPT</button> 
             </form>
         </div>
-        <p><?php if(isset($_POST["enc"])){echo $out;}?></p>
+        <p id="pass"><?php if(isset($_POST["enc"])){echo $out;}?></p><button onclick="copy()" class="copy">copy</button>
     </section>
+    <script>
+        function copy() {
+            var copyText = document.getElementById("pass");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value)
+            alert("TEXT COPIED:" + copyText.value);
+        }
+    </script>
 </body>
 </html>
