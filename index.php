@@ -10,7 +10,7 @@
                 $lin = substr($inp,$i);
                 $out .= ord($lin) . chr(0+rand(0,225));
             }
-            echo $out;
+            // echo $out;
         }else{
             echo "don't leave input empty you doughnut";
         }
@@ -41,11 +41,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
         }
         .formdiv{
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-direction: column;
         width: 100%;
 
         }
@@ -77,6 +79,7 @@
                 <button type="submit" name="dec">DECRYPT</button> 
             </form>
         </div>
+        <p><?php if(isset($_POST["enc"])){echo $out;}?></p>
     </section>
 </body>
 </html>
