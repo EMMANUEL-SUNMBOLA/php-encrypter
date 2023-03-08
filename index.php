@@ -1,20 +1,25 @@
 <?php
 
     if((isset($_POST["enc"])) && ($_SERVER["REQUEST_METHOD"] == "POST")){
-
         $out = "";
-        // $inp = readline("input for encoding in ascii chr...");
         $inp = $_POST["inp"];
         if(!empty($inp)){
             for ($i=0; $i < strlen($inp); $i++) { 
                 $lin = substr($inp,$i);
-                $out .= ord($lin) . chr(0+rand(0,225));
+                $out .= ord($lin) . ".";
             }
-            // echo $out;
         }else{
             echo "don't leave input empty you doughnut";
         }
 
+    }
+    if((isset($_POST["dec"])) && ($_SERVER["REQUEST_METHOD"] == "POST")){
+        $out = $_POST["out"];
+        $in = "";
+        for ($i=0; $i < strlen($out); $i++) { 
+            $line = explode(".",$out);
+            $in .= chr($line[$i]);
+        }
     }
 
 ?>
@@ -44,11 +49,11 @@
             flex-direction: column;
         }
         .formdiv{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            width: 100%;
 
         }
         .formdiv form{
@@ -89,6 +94,8 @@
             text-transform: uppercase;
             font-size: 20px;
             border-radius: 5px;
+            transition: background-color .3s ease-in-out;
+            transition: border .3s ease-in-out;
         }
         .copy:hover{
             background-color: white;
@@ -101,20 +108,29 @@
     <section class="container">
         <div class="formdiv">
             <form action="" method="post">
-                <input type="text" name="inp"><br>
-                <button type="submit" name="enc">ENCRYPT</button> 
+                <input type="text" name="inp" placeholder="INPUT FOR ENCRYPTION">
+                <button type="submit" name="enc"  class="copy">ENCRYPT</button> 
             </form>
-            <input type="text" id="myInput" value="<?php if(isset($_POST["enc"])){echo $out;}?>">
+            <input type="text" id="myInput" value="<?php if(isset($_POST["enc"])){echo $out;}?>" placeholder="ENCRYPTED OUTPUT">
             <button onclick="copy()" class="copy">copy</button>
             <form action="" method="post">
-                <input type="text" name="out"><br>
-                <button class="dec">DECRYPT</button>
+                <input type="text" name="out" placeholder="INPUT FOR DECRYPTION">
+                <button  class="copy" name="dec">DECRYPT</button>
             </form>
+            <input type="text" id="myOutput" value="<?php if(isset($_POST["dec"])){echo $in;}?>" placeholder="DECRYPTED OUTPUT">
+            <button onclick="copy2()" class="copy">copy</button>
         </div>
     </section>
     <script>
         function copy() {
         var copyText = document.getElementById("myInput");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(copyText.value);
+        alert("Copied the text: " + copyText.value);
+    }
+        function copy2() {
+        var copyText = document.getElementById("myOutput");
         copyText.select();
         copyText.setSelectionRange(0, 99999);
         navigator.clipboard.writeText(copyText.value);
