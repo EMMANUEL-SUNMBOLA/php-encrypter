@@ -72,11 +72,28 @@
             border: 1px solid ;
             padding: 20px 10px;
         }
+        input[id="myInput"]{
+            margin-top: 2%;
+        }
+        input{
+            width: 50%;
+            text-align: center;
+            height: 40px;
+        }
         .copy{
+            margin-top: 20px;
             width: 100px;
             height: 40px;
             color: black;
-            background-color: wheat;
+            background-color: #02af77;
+            text-transform: uppercase;
+            font-size: 20px;
+            border-radius: 5px;
+        }
+        .copy:hover{
+            background-color: white;
+            color: #02af77;
+            border: 1px solid #02af77;
         }
     </style>
 </head>
@@ -86,28 +103,23 @@
             <form action="" method="post">
                 <input type="text" name="inp"><br>
                 <button type="submit" name="enc">ENCRYPT</button> 
-                <button type="submit" name="dec">DECRYPT</button> 
+            </form>
+            <input type="text" id="myInput" value="<?php if(isset($_POST["enc"])){echo $out;}?>">
+            <button onclick="copy()" class="copy">copy</button>
+            <form action="" method="post">
+                <input type="text" name="out"><br>
+                <button class="dec">DECRYPT</button>
             </form>
         </div>
-        <!-- <p id="pass"></p> -->
-        <input type="text" id="pass" value="<?php if(isset($_POST["enc"])){echo $out;}?>">
-        <button onclick="copy()" class="copy">copy</button>
     </section>
     <script>
-        // function copy() {
-        //     var copyText = document.getElementById("pass");
-        //     copyText.select();
-        //     copyText.setSelectionRange(0, 99999);
-        //     navigator.clipboard.writeText(copyText.value)
-        //     alert("TEXT COPIED:" + copyText.value);
-        // }
         function copy() {
-  var copyText = document.getElementById("myInput");
-  copyText.select();
-  copyText.setSelectionRange(0, 99999);
-  navigator.clipboard.writeText(copyText.value);
-  alert("Copied the text: " + copyText.value);
-}
+        var copyText = document.getElementById("myInput");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(copyText.value);
+        alert("Copied the text: " + copyText.value);
+    }
     </script>
 </body>
 </html>
