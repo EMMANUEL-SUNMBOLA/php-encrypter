@@ -5,10 +5,11 @@
                 $out = "";
                 $inp = $_POST["inp"];
                 if(!empty($inp)){
-                    for ($i=0; $i < strlen($inp); $i++) { 
+                    for ($i=0; $i < (strlen($inp)+1); $i++) { 
                         $lin = substr($inp,$i);
-                        $out .= ord($lin) . ".";
+                        $out .= ord($lin) . 254;
                     }
+                    $out .= "24";
                 }else{
                     $err[] = "don't leave input empty you doughnut";
                 }
@@ -17,12 +18,13 @@
                 $in = "";
                 $out = $_POST["out"];
                 if(!empty($out)){
-                        $line = explode(".",$out);
+                        $line = explode("254",$out);
+                       
                         
-                        $err[] = $line;
-                        // foreach($line as $cellary){
-                        //     $in .= chr($cellary);
-                        // }
+                        // $err[] = $line;
+                        foreach($line as $cellary){
+                            $in = chr($cellary);
+                        }
                 }else{
                     $err[] = "fill input to be decrypted";
                 }
@@ -130,14 +132,14 @@
         </div>
         <div>
             <?php
-                if((isset($_POST["dec"])) || (isset($_POST["enc"]))){
-                    if(isset($line)){
-                        foreach($line as $cellary){
-                            // echo $cellary;
-                            echo chr($cellary) ;
-                        }
-                    }
-                }
+                // if((isset($_POST["dec"])) || (isset($_POST["enc"]))){
+                //     if(isset($line)){
+                //         foreach($line as $cellary){
+                //             // echo $cellary;
+                //             echo chr($cellary) ;
+                //         }
+                //     }
+                // }
             ?>
         </div>
     </section>
