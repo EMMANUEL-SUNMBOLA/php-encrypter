@@ -1,27 +1,35 @@
 <?php
-
-    if((isset($_POST["enc"])) && ($_SERVER["REQUEST_METHOD"] == "POST")){
-        $out = "";
-        $inp = $_POST["inp"];
-        if(!empty($inp)){
-            for ($i=0; $i < strlen($inp); $i++) { 
-                $lin = substr($inp,$i);
-                $out .= ord($lin) . ".";
+    $err = [];
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+            if((isset($_POST["enc"]))){
+                $out = "";
+                $inp = $_POST["inp"];
+                if(!empty($inp)){
+                    for ($i=0; $i < strlen($inp); $i++) { 
+                        $lin = substr($inp,$i);
+                        $out .= ord($lin) . ".";
+                    }
+                }else{
+                    $err[] = "don't leave input empty you doughnut";
+                }
             }
-        }else{
-            echo "don't leave input empty you doughnut";
-        }
-
+            elseif((isset($_POST["dec"]))){
+                $in = "";
+                $out = $_POST["out"];
+                if(!empty($out)){
+                        $line = explode(".",$out);
+                        
+                        $err[] = $line;
+                        // foreach($line as $cellary){
+                        //     $in .= chr($cellary);
+                        // }
+                }else{
+                    $err[] = "fill input to be decrypted";
+                }
+            }else{
+                $err[] = "something wen't wrong";
+            }
     }
-    if((isset($_POST["dec"])) && ($_SERVER["REQUEST_METHOD"] == "POST")){
-        $out = $_POST["out"];
-        $in = "";
-        for ($i=0; $i < strlen($out); $i++) { 
-            $line = explode(".",$out);
-            $in .= chr($line[$i]);
-        }
-    }
-
 ?>
 
 <!DOCTYPE html>
@@ -119,6 +127,18 @@
             </form>
             <input type="text" id="myOutput" value="<?php if(isset($_POST["dec"])){echo $in;}?>" placeholder="DECRYPTED OUTPUT">
             <button onclick="copy2()" class="copy">copy</button>
+        </div>
+        <div>
+            <?php
+                if((isset($_POST["dec"])) || (isset($_POST["enc"]))){
+                    if(isset($line)){
+                        foreach($line as $cellary){
+                            // echo $cellary;
+                            echo chr($cellary) ;
+                        }
+                    }
+                }
+            ?>
         </div>
     </section>
     <script>
